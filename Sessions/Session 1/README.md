@@ -229,3 +229,79 @@ Ainsi :
 
 
 ## Étude de Cas : Attaque par Élévation de Privilège
+
+### Contexte
+
+Dans cet étude de cas, nous examinons une attaque par élévation de privilège dans un environnement conteneurisé. Un attaquant a exploité une faille dans un container mal configuré, lui permettant d'exécuter du code sur l'hôte et de récupérer une sauvegarde de base de données contenant des informations bancaires sensibles.
+
+### Analyse de l'Attaque
+
+L'attaque a réussi en raison de plusieurs failles de sécurité dans la configuration et la gestion des containers :
+
+1) **Exécution avec Privilèges Élevés :** Le container fonctionnait probablement avec des privilèges élevés, permettant à l'attaquant d'exécuter du code sur l'hôte.
+
+2) **Capacités Système Excessives :** Le container disposait de capacités système non nécessaires, facilitant l'élévation de privilège.
+
+3) **Mauvaise Configuration Réseau :** Les règles de réseau n'étaient pas suffisamment restrictives, permettant un accès non autorisé aux ressources sensibles.
+
+4) **Images Non Sécurisées :** L'image du container contenait des vulnérabilités exploitables.
+
+5) **Absence de Surveillance :** L'attaque n'a pas été détectée à temps en raison d'un manque de surveillance et de logging adéquats.
+
+### Mesures Préventives
+
+Pour empêcher ce type d'attaque, plusieurs mesures de sécurité doivent être mises en place :
+
+1) **Utilisation de Containers Non Privilégiés :**
+    
+    - Créer des utilisateurs non privilégiés pour exécuter les applications dans les containers.
+    - Exemple de Dockerfile sécurisé :
+    ```bash
+    FROM alpine
+    RUN adduser -D appuser
+    USER appuser
+    CMD ["echo", "Container sécurisé!"]
+    ```
+
+2) **Limitation des Capacités du Container :**
+
+    - Utiliser l'option ```--cap-drop``` pour retirer les capacités non nécessaires lors du lancement du container.
+
+3) **Isolation du Réseau :**
+
+    - Configurer des réseaux Docker personnalisés et appliquer des politiques de pare-feu strictes pour limiter les communications entre les containers et l'hôte.
+
+4) **Scanner Régulièrement les Images :**
+
+    - Utiliser des outils comme Trivy ou Grype pour analyser les images Docker et détecter les vulnérabilités.
+    - Exemple de commande :
+    ```bash
+    trivy image vulnerables/web-dvwa
+    ```
+
+5) **Mises à Jour Régulières :**
+
+    - Mettre en place un processus de mise à jour régulière des images et des dépendances pour corriger les vulnérabilités dès qu'elles sont découvertes.
+
+6) **Surveillance et Logging :**
+
+    - implémenter une surveillance continue des containers et des logs pour détecter les comportements anormaux.
+    - Utiliser des outils de monitoring et d'alerting pour réagir rapidement en cas d'incident.
+
+7) **Utilisation de Rootless Mode :** (voir session 2)
+
+    - Configurer Docker pour fonctionner en mode rootless afin de réduire les risques liés à l'exécution de processus avec des privilèges élevés.
+
+8) **Sécurisation des Sauvegardes :**
+
+    - Stocker les sauvegardes dans un emplacement sécurisé et chiffré, accessible uniquement par des services autorisés.
+
+### Conclusion
+
+La mise en œuvre de ces mesures de sécurité permet de renforcer la protection des environnements conteneurisés contre les attaques par élévation de privilège. La sécurité des containers nécessite une vigilance constante et des mises à jour régulières des pratiques et des outils utilisés. En adoptant une approche proactive, les organisations peuvent minimiser les risques et protéger efficacement leurs données sensibles.
+
+
+**FIN**
+
+
+
