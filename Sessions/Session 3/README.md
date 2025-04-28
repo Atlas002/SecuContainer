@@ -1,4 +1,4 @@
-# Session 3 : Sécurité des orchestrateurs**
+# Session 3 : Sécurité des orchestrateurs
 
 ## 1. Déploiement du cluster Kubernetes avec Kind
 
