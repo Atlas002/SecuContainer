@@ -1,5 +1,10 @@
 # Sécurité des Containers
 
+auteurs :
+- Jules Dias
+- Arthur Berret
+- Théophile Dutrey
+
 Ce cours explore les concepts fondamentaux et avancés de la sécurité des containers, en mettant l'accent sur les pratiques de sécurité essentielles pour protéger les environnements conteneurisés.
 
 ## Introduction aux Containers et à la Sécurité
