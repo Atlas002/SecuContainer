@@ -1,9 +1,9 @@
 # Sécurité des Containers
 
 auteurs :
-- Jules Dias
-- Arthur Berret
-- Théophile Dutrey
+- [Jules Dias](https://github.com/JulesDias)
+- [Arthur Berret](https://github.com/Atlas002)
+- [Théophile Dutrey](https://github.com/theophiledutrey)
 
 Ce cours explore les concepts fondamentaux et avancés de la sécurité des containers, en mettant l'accent sur les pratiques de sécurité essentielles pour protéger les environnements conteneurisés.
 
